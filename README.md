@@ -33,6 +33,7 @@ Through this project, we aim to advance meteorological forecasting and contribut
 - **`TestDate.txt`**: Specifies the date used for validation of the results.
 - **`Train.py`**: Script used to train the machine learning models.
 - **`utils.py`**: Contains miscellaneous functions such as normalization.
+- **`VariableSelection.py`**: Contains the code to evaluate the importance of its input predictors.
 
 ## Requirements
 
@@ -57,10 +58,12 @@ Please install the required packages.
 Before running the model, ensure the datasets are properly prepared. We are using two main datasets:
 - **ERA5 Reanalysis Data**: This dataset contains global weather data from the European Centre for Medium-Range Weather Forecasts (ECMWF).
 - **GPM-IMERG Dataset**: This is a satellite-based precipitation dataset from NASA.
+- **TIGGE Dataset**: This database has established itself as a key window into the capability of state-of-the-art operational NWP models and has proven very useful to the research community.
 
 #### Download the datasets:
 - **ERA5 Reanalysis Data**: [Download Link](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5)
 - **GPM-IMERG Dataset**: [Download Link](https://gpm.nasa.gov/data-access/downloads/gpm)
+- **TIGGE Dataset**: [Download Link](https://apps.ecmwf.int/datasets/data/tigge/levtype=sfc/type=cf/)
 
 Once downloaded, ensure the datasets are saved in the appropriate directory specified in the code and are in the correct format (NetCDF).
 
