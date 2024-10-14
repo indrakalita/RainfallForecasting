@@ -196,11 +196,11 @@ best_train_loss, current_patience, patience = np.inf, 0, 1200
 #new hyparameters
 n = len(train_loader.dataset) # number of training sample
 B = batch_size  # Mini-batch size
-sigma_sq = 0.1
+sigma_sq = 0.01
 rho = 0.0001
 #Selection Variables
 K = 57  # Number of weather variables ERA5 55+2
-r = math.log(18)  # Hyperparameter for Bernoulli prior (adjust as needed)
+r = 3.76  # Hyperparameter for Bernoulli prior (adjust as needed)
 
 
 def StatPlot(stats, output, epoch):
