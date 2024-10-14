@@ -30,10 +30,13 @@ Through this project, we aim to advance meteorological forecasting and contribut
 - **`Latlon/`**: Folder containing latitude and longitude information for each grid.
 - **`Models/`**: Directory for saved models (12-hour- and 30-hour lag).
 - **`models64.py`**: Defines the U-Net model architecture used in the project.
-- **`TestDate.txt`**: Specifies the date used for validation of the results.
+- **`TestDate.txt`**: Specifies the date used to validate the results.
 - **`Train.py`**: Script used to train the machine learning models.
 - **`utils.py`**: Contains miscellaneous functions such as normalization.
 - **`VariableSelection.py`**: Contains the code to evaluate the importance of its input predictors.
+- **`download.py`**: To download the ERA5 data in netCDF format using the CDS API, which requires some prior setup on any user's machine (available in DownloadAndProcessData folder)
+- **`run.py`**: To process the downloaded the ERA5 data. The script uses functions from **functions.py** to process the files into daily .npy arrays and save them to a new given location (available in DownloadAndProcessData folder)
+
 
 ## Requirements
 
