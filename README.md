@@ -4,7 +4,7 @@
 
 Welcome to our project on **rainfall prediction in West Africa using deep learning techniques**. The challenge we are addressing stems from the difficulty that traditional numerical weather prediction (NWP) models face in providing accurate forecasts in this region, which is expected to experience more intense and unpredictable rainfall events due to climate change.
 
-Reliable rainfall forecasts are crucial for effective water resource management, agriculture, and disaster preparedness. Our team at the **Foundations for Statistical Methods in the Environmental Sciences (FORMES)** at **Boston University** is committed to developing innovative, data-driven approaches for this purpose. We leverage state-of-the-art machine learning techniques, specifically **U-Net convolutional neural network (CNN)** models, to predict 24-hour rainfall with 12-hour and 30-hour lead times.
+Reliable rainfall forecasts are crucial for effective water resource management, agriculture, and disaster preparedness. Our team at the **Foundations for Statistical Methods in the Environmental Sciences (FORMES)** group at **Boston University** is committed to developing innovative, data-driven approaches for this purpose. We leverage state-of-the-art machine learning techniques, specifically **U-Net convolutional neural network (CNN)** models, to predict 24-hour rainfall with 12-hour and 30-hour lead times.
 
 Our goal is to significantly improve forecasting accuracy by utilizing extensive meteorological datasets, including the **ERA5 reanalysis dataset** and the **GPM-IMERG dataset**.
 
