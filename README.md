@@ -86,7 +86,7 @@ jupyter notebook Inference.ipynb
 ```
 ## References
 
-- Kalita, Indrajit, Vilallonga, Lucia, & Atchade, Yves. (2024). *Data-driven rainfall prediction at a regional scale: a case study with Ghana*. arXiv preprint arXiv:2410.14062.
+Kalita, Indrajit, Vilallonga, Lucia, & Atchade, Yves. (2024). *Data-driven rainfall prediction at a regional scale: a case study with Ghana*. arXiv preprint arXiv:2410.14062.
 
 
 
