@@ -81,7 +81,7 @@ if __name__ == "__main__":
     pool_single = multiprocessing.Pool()
 
     # Map the function to download_variable to the list of surface variables
-    pool_single.map(download_variable, single_vars)
+    pool_single.map(download_variable, surface_vars)
 
     # Close the pool
     pool_single.close()
