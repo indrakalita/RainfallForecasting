@@ -51,6 +51,8 @@ Ensure the following dependencies are installed to run the code:
 - netCDF4
 - scikit-learn
 - OpenCV
+- isodisreg
+- properscoring
 
 Please install the required packages.
 
