@@ -4,7 +4,7 @@
 
 Welcome to our project on **rainfall prediction in West Africa using deep learning techniques**. The challenge we are addressing stems from the difficulty that traditional numerical weather prediction (NWP) models face in providing accurate forecasts in this region, which is expected to experience more intense and unpredictable rainfall events due to climate change.
 
-Reliable rainfall forecasts are crucial for effective water resource management, agriculture, and disaster preparedness. Our team at the **Foundations for Statistical Methods in the Environmental Sciences (FORMES)** group at **Boston University** is committed to developing innovative, data-driven approaches for this purpose. We leverage state-of-the-art machine learning techniques, specifically **U-Net convolutional neural network (CNN)** models, to predict 24-hour rainfall with 12-hour and 30-hour lead times.
+Reliable rainfall forecasts are crucial for effective water resource management, agriculture, and disaster preparedness. Our team at the **Foundations for Statistical Methods in the Environmental Sciences (FORMES)** group at **Boston University** is committed to developing innovative, data-driven approaches for this purpose. We leverage state-of-the-art machine learning techniques, specifically **U-Net convolutional neural network (CNN)** models, to predict 24-hour rainfall with 12-hour and 18-hour lead times.
 
 Our goal is to significantly improve forecasting accuracy by utilizing extensive meteorological datasets, including the **ERA5 reanalysis dataset** and the **GPM-IMERG dataset**.
 
@@ -15,9 +15,9 @@ Our goal is to significantly improve forecasting accuracy by utilizing extensive
 4. Combine data-driven and classical NWP techniques to optimize forecast performance.
 
 ### Main Achievements:
-- Our 12-hour lead-time model matches or even outperforms traditional **ECMWF** forecasts.
+- Our 12-hour lead-time model matches or even outperforms traditional **ECMWF Ensemble** forecasts.
 - A novel statistical methodology has been developed to understand the role of different meteorological variables in driving precipitation in Ghana.
-- We have shown that combining machine learning models with classical NWP methods enhances forecast accuracy.
+- We have shown that combining machine learning models with classical NWP methods enhances forecast accuracy (especially outperforms the NWP forecast).
 
 Through this project, we aim to advance meteorological forecasting and contribute to improved water resource management, agriculture, and disaster preparedness in tropical regions.
 
