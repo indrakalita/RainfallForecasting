@@ -9,7 +9,39 @@ from sklearn.preprocessing import StandardScaler
 import torch.nn.functional as F
 import torch.optim as optim
 
-def visualize(**images):
+#Visualization with common bar and same location values
+def visual(Bar=False, **images):
+    """Plot images in one row with a single color bar."""
+    n = len(images)
+    plt.figure(figsize=(16, 5))
+    
+    # Find the common color range
+    vmin = min(image.min() for image in images.values())
+    vmax = max(image.max() for image in images.values())
+    
+    # Generate random locations once
+    first_image = list(images.values())[0]
+    x_locs = np.random.randint(0, first_image.shape[1], 5)
+    y_locs = np.random.randint(0, first_image.shape[0], 5)
+    
+    for i, (name, image) in enumerate(images.items()):
+        plt.subplot(1, n, i + 1)
+        plt.xticks([])
+        plt.yticks([])
+        plt.title(name)
+        img = plt.imshow(image, cmap='viridis', vmin=vmin, vmax=vmax)  # Use common color range
+        
+        # Print values at the same random locations
+        #for x, y in zip(x_locs, y_locs):
+        #    plt.text(x, y, f'{image[y, x]:.2f}', color='red')  # Print values at random locations
+    
+    if Bar:
+        cbar = plt.colorbar(img, ax=plt.gca(), orientation='horizontal', fraction=0.02, pad=0.04)
+        cbar.ax.tick_params(labelsize=10)
+    
+    plt.show()
+
+def visualize(Bar=False, **images):
     """Plot images in one row."""
     n = len(images)
     plt.figure(figsize=(16, 5))
@@ -19,13 +51,13 @@ def visualize(**images):
         plt.yticks([])
         plt.title(name)
         plt.imshow(image, cmap='viridis')  # Specify the colormap if needed
-        plt.colorbar()
-        # Randomly select locations to print values
-        x_locs = np.random.randint(0, image.shape[1], 5)
-        y_locs = np.random.randint(0, image.shape[0], 5)
-        for x, y in zip(x_locs, y_locs):
-            plt.text(x, y, f'{image[y, x]:.2f}', color='red')  # Print values at random locations
-
+        if(Bar==True):
+            plt.colorbar()
+            # Randomly select locations to print values
+            x_locs = np.random.randint(0, image.shape[1], 5)
+            y_locs = np.random.randint(0, image.shape[0], 5)
+            for x, y in zip(x_locs, y_locs):
+                plt.text(x, y, f'{image[y, x]:.2f}', color='red')  # Print values at random locations
     plt.show()
 # For one pair only.
 class CustomDataset(Dataset):
@@ -57,3 +89,15 @@ def norm(data):
     return normalized_data, min_val, max_val
 def inorm(normalized_data, min_val, max_val):
     return normalized_data * (max_val - min_val) + min_val
+
+#atention loss
+def attention_loss(output, target):
+    # Calculate MSE loss
+    mse_loss = F.mse_loss(output, target)
+    # Compute attention weights based on output values
+    attention_weights = torch.abs(output)
+    # Normalize attention weights to sum to 1
+    attention_weights /= attention_weights.sum()
+    # Combine MSE loss with attention weights
+    attention_aware_loss = torch.sum(attention_weights * mse_loss)
+    return attention_aware_loss

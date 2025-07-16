@@ -17,7 +17,7 @@ def LoadData(GPM_path, ERA_path, variable_path, ERA_zoom = True, GPM_zoom=False,
     with open(variable_path, 'r') as file:
         for line in file:
             variables.append(line.strip()) #Remove leading/trailing whitespaces and add folder name to the list
-
+    #print(variables)
     files = sorted(os.listdir(GPM_path)) # Only one variable for GPM.
     count = 0
     for f in files:
@@ -25,7 +25,7 @@ def LoadData(GPM_path, ERA_path, variable_path, ERA_zoom = True, GPM_zoom=False,
         file = f.split('.')[0] #  remove extension .nc4 # file name of GPM "IMERG_date.nc4"
         date = file.split('_')[1] # consider the date only
         N, month = day_of_year(date)
-        if month in [1,2,3,4,5,6,7,8,9,10,11,12]:
+        if month in [1,2,3,4,5,6,7,8,9,10,11,12]:  #April to Sept #for dry---> [1,2,3,10,11,12] #for all---> [1,2,3,4,5,6,7,8,9,10,11,12]
             count = count + 1
     GPM_data = list()
     dateseq = list()
@@ -40,21 +40,22 @@ def LoadData(GPM_path, ERA_path, variable_path, ERA_zoom = True, GPM_zoom=False,
         file = f.split('.')[0] #  remove extension .nc4 # file name of GPM "IMERG_date.nc4"
         date = file.split('_')[1] # consider the date only
         N, month = day_of_year(date)
-        if month in [1,2,3,4,5,6,7,8,9,10,11,12]: #April to Sept #for dry---> not in [1,2,3,10,11,12] #for all---> [1,2,3,4,5,6,7,8,9,10,11,12]
+        if month in [1,2,3,4,5,6,7,8,9,10,11,12]: #April to Sept #for dry---> [1,2,3,10,11,12] #for all---> [1,2,3,4,5,6,7,8,9,10,11,12]
             dateseq.append(date)
             dta = nc4.Dataset(os.path.join(GPM_path,f))
-            I = dta.variables['precipitationCal'][0,:].data
+            I = dta.variables['precipitationCal'][0,:].data #more smooth
+            #I = dta.variables['HQprecipitation'][0,:].data # complex
             I = np.rot90(I) # To match with the ERA5 dataset 54X73-->73X54 #transpose will not work
             if(i==0):  # to read the lat long information of GPM and ERA5 data
                 GPM_long = dta.variables['lon'][:].data
                 GPM_lat = dta.variables['lat'][:].data[::-1] # read the latitute from last to first (11 is he first latitude)
-                ERA_long = np.load('/Latlon/longitude_6h_2000-01-01_2023-09-07_filled.npy')[0]
-                ERA_lat = np.load('/Latlon/latitude_6h_2000-01-01_2023-09-07_filled.npy')[0]
+                ERA_long = np.load('/projectnb/labci/Indrajit/Rainfall/data/ERA5/longitude_6h_2000-01-01_2023-09-07_filled.npy')[0]
+                ERA_lat = np.load('/projectnb/labci/Indrajit/Rainfall/data/ERA5/latitude_6h_2000-01-01_2023-09-07_filled.npy')[0]
                 GPM_cord = np.tile(GPM_lat, (len(GPM_long), 1)).T #To create 73X54 dimensional matrix with latitude only (GPM)
                 ERA_cord = np.tile(ERA_lat, (len(ERA_long), 1)).T #To create 30X23 dimensional matrix with latitude only (ERA5)
             if(GPM_zoom==True):
-                zoom_factors = (GPM_desired_shape[0] / I.shape[0], GPM_desired_shape[1] / I.shape[1])
-                I = zoom(I, zoom_factors, order=3)
+                zoom_factors = (GPM_desired_shape[0] / I.shape[0], GPM_desired_shape[1] / I.shape[1]) # comment this if no zoom
+                I = zoom(I, zoom_factors, order=3) #order=3 corresponds to cubic interpolation
             GPM_data.append(I)
             dta.close()
             ####################### Main operation for ERA5 #######################
@@ -80,7 +81,7 @@ def LoadData(GPM_path, ERA_path, variable_path, ERA_zoom = True, GPM_zoom=False,
                     fname = name+'_filled_'+date+'.npy'
                 #print(path)
                 I = np.load(os.path.join(path,fname))
-                I = I[1,:,:]  # [0,1,2,3][Midnight, 6AM, 12Noon, 6PM]
+                I = I[1,:,:]  # Noon observation [0,1,2,3][12 Midnight, 6AM, 12Noon, 6PM]
                 #print('ERA5',fname, I.shape,I)
                 if(ERA_zoom==True):
                     zoom_factors = (ERA_desired_shape[0] / I.shape[0], ERA_desired_shape[1] / I.shape[1]) # comment this if no zoom
